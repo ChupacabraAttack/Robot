@@ -1,9 +1,15 @@
 package com.schoultis.robot;
 
-import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 /**
  * Created by onelyx on 3/8/14.
@@ -18,6 +24,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
     private Robot robot;
     private Stage stage;
     private InputState inputState;
+    private BufferedImage buffer;
 
     public GamePanel(){
         addKeyListener(this);
@@ -29,6 +36,9 @@ class GamePanel extends JPanel implements Runnable, KeyListener
         stage = new Stage(PANEL_WIDTH, PANEL_HEIGHT);
         robot = new Robot(stage);
         inputState = new InputState();
+
+        buffer = new BufferedImage(PANEL_WIDTH, PANEL_HEIGHT,
+                                   BufferedImage.TYPE_INT_RGB);
     }
 
     public void addNotify(){
@@ -77,7 +87,13 @@ class GamePanel extends JPanel implements Runnable, KeyListener
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        robot.paint(g, this);
+        Graphics bg = buffer.getGraphics();
+
+        bg.setColor(Color.WHITE);
+        bg.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
+        robot.paint(bg, this);
+
+        g.drawImage(buffer, 0,0,this);
     }
 
    public void keyPressed(KeyEvent e)
@@ -126,7 +142,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
 
     private static void createAndShowGUI()
     {
-        JFrame frame = new JFrame("Window name");
+        JFrame frame = new JFrame("Robot");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.add(new GamePanel());
 

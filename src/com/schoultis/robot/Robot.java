@@ -11,17 +11,17 @@ import java.awt.Color;
  * Created by onelyx on 3/8/14.
  */
 public class Robot {
-    final int WIDTH = 90;
-    final int HEIGHT = 90;
+    final int WIDTH = 32;
+    final int HEIGHT = 64;
     final int MOVE_SPEED = 8;
     final float GRAVITY = 0.8f;
-    final float JUMP_SPEED = 15;
+    final float JUMP_SPEED = 12;
 
     float x, y;
     float dx, dy;
 
     Stage stage;
-    Image mushroom;
+    Image sprite;
 
     public Robot(Stage stage) {
         this.stage = stage;
@@ -30,8 +30,9 @@ public class Robot {
         this.dx = 0;
         this.dy = 0;
 
-        ImageIcon ii = new ImageIcon(this.getClass().getResource("/assets/mushroom.jpeg"));
-        mushroom = ii.getImage();
+        ImageIcon ii = new ImageIcon(
+                this.getClass().getResource("/assets/RoboSprite.jpeg"));
+        sprite = ii.getImage();
     }
 
     public void cycle(InputState state) {
@@ -90,8 +91,8 @@ public class Robot {
 
     public void paint(Graphics g, ImageObserver observer) {
         Graphics2D g2d = (Graphics2D)g;
-        g2d.drawImage(mushroom, (int)x, (int)y, WIDTH, HEIGHT, observer);
-        g.setColor(Color.WHITE);
+        g2d.drawImage(sprite, (int)x, (int)y, observer);
+        g.setColor(Color.BLACK);
         g.drawRect((int)x,(int)y, WIDTH, HEIGHT);
     }
 }
