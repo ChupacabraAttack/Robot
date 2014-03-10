@@ -16,9 +16,10 @@ import javax.swing.WindowConstants;
  */
 class GamePanel extends JPanel implements Runnable, KeyListener
 {
-    private final int PANEL_WIDTH = 600;
-    private final int PANEL_HEIGHT = 400;
-    private final int DELAY = 25;
+    private static final int PANEL_WIDTH = 600;
+    private static final int PANEL_HEIGHT = 400;
+    private static final int DELAY = 25;
+    private static final Color BACKGROUND_COLOR = Color.BLUE;
 
     private Thread animator;
     private Robot robot;
@@ -89,7 +90,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
         super.paintComponent(g);
         Graphics bg = buffer.getGraphics();
 
-        bg.setColor(Color.WHITE);
+        bg.setColor(BACKGROUND_COLOR);
         bg.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
         robot.paint(bg, this);
 

@@ -15,6 +15,7 @@ public class Block extends Robot {
 
     int width;
     int height;
+    Image sprite;
 
 
     // Constructor
