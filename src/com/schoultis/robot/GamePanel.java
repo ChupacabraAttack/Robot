@@ -6,10 +6,12 @@ import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
+import javax.swing.ImageIcon;
 
 /**
  * Created by onelyx on 3/8/14.
@@ -26,6 +28,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
     private Stage stage;
     private InputState inputState;
     private BufferedImage buffer;
+    private Image background;
 
     public GamePanel(){
         addKeyListener(this);
@@ -40,6 +43,9 @@ class GamePanel extends JPanel implements Runnable, KeyListener
 
         buffer = new BufferedImage(PANEL_WIDTH, PANEL_HEIGHT,
                                    BufferedImage.TYPE_INT_RGB);
+        ImageIcon ii = new ImageIcon(
+                this.getClass().getResource("/assets/ominous.png"));
+        background = ii.getImage();
     }
 
     public void addNotify(){
@@ -90,8 +96,11 @@ class GamePanel extends JPanel implements Runnable, KeyListener
         super.paintComponent(g);
         Graphics bg = buffer.getGraphics();
 
-        bg.setColor(BACKGROUND_COLOR);
-        bg.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
+        //bg.setColor(BACKGROUND_COLOR);
+        //bg.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
+        bg.drawImage(background,0,0,600,400,this);
+        //bg.setColor(Color.WHITE);
+        //bg.drawLine(300, 400, 320, 380);
         robot.paint(bg, this);
 
         g.drawImage(buffer, 0,0,this);
