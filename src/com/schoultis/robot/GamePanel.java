@@ -37,7 +37,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
         setPreferredSize(new Dimension(PANEL_WIDTH, PANEL_HEIGHT));
         setDoubleBuffered(true);
 
-        stage = new Stage(PANEL_WIDTH, PANEL_HEIGHT);
+        stage = new Stage(PANEL_WIDTH, PANEL_HEIGHT, 20);
         robot = new Robot(stage);
         inputState = new InputState();
 
@@ -99,6 +99,7 @@ class GamePanel extends JPanel implements Runnable, KeyListener
         //bg.setColor(BACKGROUND_COLOR);
         //bg.fillRect(0, 0, PANEL_WIDTH, PANEL_HEIGHT);
         bg.drawImage(background,0,0,600,400,this);
+        stage.draw(bg);
         //bg.setColor(Color.WHITE);
         //bg.drawLine(300, 400, 320, 380);
         robot.paint(bg, this);
